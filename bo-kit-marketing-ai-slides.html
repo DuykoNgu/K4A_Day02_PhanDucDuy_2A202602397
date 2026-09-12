@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bộ kit marketing sản phẩm bằng AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17121F;
+    --panel: #211A2E;
+    --panel-2: #2B2240;
+    --line: rgba(245,242,250,0.14);
+    --text: #F6F3FB;
+    --text-muted: #B3A5CC;
+    --lime: #C6F24E;
+    --lime-dim: #5B6B2E;
+    --coral: #FF7A63;
+    --sky: #6FD8C7;
+    --serif: 'Fraunces', serif;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ font-size: 112.5%; }
+  html,body{
+    height:100%;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    overflow:hidden;
+  }
+
+  .deck{
+    position:relative;
+    width:100vw;
+    height:100vh;
+  }
+
+  .slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: clamp(2rem, 5vh, 4rem) clamp(1.5rem, 7vw, 6rem);
+    opacity:0;
+    visibility:hidden;
+    transform: translateY(14px);
+    transition: opacity .5s ease, transform .5s ease, visibility .5s;
+  }
+  .slide.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+
+  .kicker{
+    font-family:var(--mono);
+    font-size:clamp(0.85rem, 1vw, 1rem);
+    letter-spacing:0.02em;
+    color:var(--lime);
+    margin-bottom:clamp(1.2rem, 2.4vh, 2rem);
+  }
+
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    color:var(--text);
+  }
+
+  .slide-cover h1{ font-size: clamp(2.8rem, 6.2vw, 5.6rem); max-width: 16ch; }
+  .slide h1.title{ font-size: clamp(2.2rem, 4.4vw, 3.8rem); max-width: 21ch; margin-bottom: clamp(1.6rem, 3vh, 2.6rem); }
+
+  .lede{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size: clamp(1.3rem, 2vw, 1.9rem);
+    color:var(--text-muted);
+    max-width: 48ch;
+    line-height:1.5;
+    margin-top:clamp(1.4rem, 2.6vh, 2.2rem);
+  }
+
+  .body-text{
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    line-height:1.7;
+    color:var(--text-muted);
+    max-width:56ch;
+  }
+
+  /* ---- Cover ---- */
+  .slide-cover{ justify-content: flex-end; }
+  .cover-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1.6rem 2.8rem;
+    margin-top:clamp(1.8rem, 3vh, 2.8rem);
+    font-family:var(--mono);
+    font-size:clamp(0.95rem, 1.1vw, 1.1rem);
+    color:var(--text-muted);
+  }
+  .cover-meta span b{ color:var(--text); font-weight:500; }
+  .cover-bignum{
+    position:absolute;
+    top:clamp(3vh, 7vh, 9vh); right:clamp(1.5rem, 7vw, 6rem);
+    font-family:var(--serif);
+    font-size: clamp(4.5rem, 10vw, 9.5rem);
+    font-weight:700;
+    color:var(--panel-2);
+    line-height:1;
+  }
+
+  /* ---- Flexible layout helpers ---- */
+  .cols{
+    display:flex;
+    flex-wrap:wrap;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items:flex-start;
+  }
+  .cols > *{ flex:1 1 360px; min-width:0; }
+
+  /* ---- Bullet list ---- */
+  ul.plain{ list-style:none; }
+  ul.plain li{
+    position:relative;
+    padding-left:1.9rem;
+    margin-bottom:clamp(1rem, 2vh, 1.5rem);
+    font-size:clamp(1.1rem, 1.4vw, 1.3rem);
+    line-height:1.6;
+    color:var(--text);
+    max-width:50ch;
+  }
+  ul.plain li::before{
+    content:"";
+    position:absolute;
+    left:0; top:0.6em;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--lime);
+  }
+  ul.plain li .muted{ color:var(--text-muted); display:block; font-size:0.82em; margin-top:0.3rem; }
+
+  /* ---- Skill grid ---- */
+  .skill-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.2rem;
+  }
+  .skill-cell{
+    background:var(--bg);
+    padding: clamp(1.4rem, 3vh, 2.2rem) clamp(1.2rem, 2vw, 1.8rem);
+    flex:1 1 180px;
+    min-height:160px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .skill-cell .n{ font-family:var(--mono); color:var(--lime-dim); font-size:clamp(0.85rem,1vw,1rem); }
+  .skill-cell .t{ font-size:clamp(1.05rem, 1.3vw, 1.25rem); line-height:1.4; color:var(--text); }
+
+  /* ---- Audience slide ---- */
+  .audience-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    border-top:1px solid var(--line);
+    margin-top:clamp(1.6rem,3vh,2.4rem);
+  }
+  .audience-col{
+    flex:1 1 240px;
+    padding: clamp(1.4rem, 3vh, 2rem) clamp(1.2rem, 2vw, 1.8rem) 0 0;
+    border-right:1px solid var(--line);
+  }
+  .audience-col:last-child{ border-right:none; }
+  .audience-col h3{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(1.3rem, 1.8vw, 1.7rem);
+    margin-bottom:0.8rem;
+  }
+  .audience-col p{ color:var(--text-muted); font-size:clamp(1rem, 1.25vw, 1.2rem); line-height:1.6; }
+
+  /* ---- WORKFLOW (flowchart) ---- */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap: clamp(0.6rem, 1.2vw, 1rem);
+    margin-top: clamp(1.6rem, 3vh, 2.4rem);
+  }
+  .flow-step{
+    flex:1 1 200px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding: clamp(1.2rem, 2.4vh, 1.8rem) clamp(1.1rem, 1.8vw, 1.5rem);
+    display:flex;
+    flex-direction:column;
+    gap:0.6rem;
+    position:relative;
+  }
+  .flow-step .fn{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:700;
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+    color:var(--lime);
+    line-height:1;
+  }
+  .flow-step h4{
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    font-weight:600;
+    color:var(--text);
+  }
+  .flow-step p{
+    color:var(--text-muted);
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    line-height:1.55;
+  }
+  .flow-arrow{
+    flex:0 0 auto;
+    align-self:center;
+    color:var(--lime-dim);
+    font-size:clamp(1.4rem, 2vw, 1.9rem);
+    padding:0 0.2rem;
+  }
+  @media (max-width: 900px){
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform:rotate(90deg); align-self:flex-start; margin-left:1.4rem; }
+    .flow-step{ flex:1 1 auto; }
+  }
+
+  /* ---- WORKFLOW COMPARE (current vs future state) ---- */
+  .flow-compare{ display:flex; flex-direction:column; gap: clamp(1.6rem, 3vh, 2.4rem); margin-top: clamp(1.2rem, 2.4vh, 1.8rem); }
+  .flow-row-head{ display:flex; align-items:baseline; gap:0.9rem; margin-bottom:0.7rem; }
+  .flow-row-head .tag{
+    font-family:var(--mono); font-size:clamp(0.72rem, 0.85vw, 0.88rem);
+    padding:0.2rem 0.55rem; border:1px solid var(--line); color:var(--text-muted);
+  }
+  .flow-row-head h3{ font-family:var(--serif); font-weight:600; font-size:clamp(1.15rem, 1.6vw, 1.5rem); }
+  .flow-row-head .time{ font-family:var(--mono); font-size:clamp(0.85rem, 1vw, 1rem); color:var(--lime); margin-left:auto; }
+  .row-current .flow-row-head .time{ color:var(--coral); }
+
+  .flow-compact{ display:flex; flex-wrap:wrap; align-items:stretch; gap:clamp(0.35rem, 0.8vw, 0.6rem); }
+  .fc-step{
+    flex:1 1 120px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding: clamp(0.7rem, 1.4vh, 1rem) clamp(0.7rem, 1.1vw, 0.9rem);
+    display:flex; flex-direction:column; gap:0.35rem;
+    min-width:110px;
+  }
+  .fc-step .fc-n{ font-family:var(--mono); color:var(--text-muted); font-size:clamp(0.7rem, 0.85vw, 0.82rem); }
+  .fc-step h5{ font-size:clamp(0.85rem, 1vw, 1rem); font-weight:600; line-height:1.3; color:var(--text); }
+  .fc-step .fc-time{ font-family:var(--mono); font-size:clamp(0.72rem, 0.85vw, 0.82rem); color:var(--text-muted); }
+  .fc-arrow{ align-self:center; color:var(--text-muted); font-size:clamp(1rem, 1.3vw, 1.3rem); flex:0 0 auto; opacity:0.5; }
+
+  .fc-badge{
+    align-self:flex-start;
+    font-family:var(--mono); font-size:clamp(0.62rem, 0.72vw, 0.7rem);
+    padding:0.15rem 0.4rem;
+    letter-spacing:0.01em;
+  }
+  .fc-step.bottleneck{ border-color:var(--coral); background:rgba(255,122,99,0.08); }
+  .fc-badge.bottleneck{ background:var(--coral); color:#1A0E0B; }
+  .fc-badge.ai{ background:var(--lime); color:#1A2308; }
+  .fc-badge.human{ background:var(--sky); color:#08211C; }
+
+  .flow-note{
+    margin-top:0.4rem;
+    font-size:clamp(0.85rem, 1vw, 1rem);
+    color:var(--text-muted);
+    line-height:1.6;
+    max-width:80ch;
+  }
+
+  @media (max-width:900px){
+    .flow-compact{ flex-direction:column; }
+    .fc-arrow{ transform:rotate(90deg); }
+  }
+
+  /* ---- Differentiation slide ---- */
+  .compare{
+    display:flex;
+    flex-wrap:wrap;
+    gap: clamp(1.6rem, 3vw, 2.8rem);
+    margin-top:clamp(1.6rem,3vh,2.4rem);
+  }
+  .compare-box{
+    flex:1 1 320px;
+    padding: clamp(1.6rem, 3vh, 2.4rem);
+    border:1px solid var(--line);
+  }
+  .compare-box.dim{ opacity:0.5; }
+  .compare-box h4{
+    font-family:var(--mono);
+    font-size:clamp(0.85rem, 1vw, 1rem);
+    color:var(--text-muted);
+    margin-bottom:1.1rem;
+  }
+  .compare-box .chain{
+    font-family:var(--serif);
+    font-size:clamp(1.15rem, 1.5vw, 1.4rem);
+    color:var(--text);
+    line-height:1.9;
+  }
+  .compare-box.highlight{ border-color: var(--lime-dim); background: rgba(198,242,78,0.06); }
+  .compare-box.highlight h4{ color:var(--lime); }
+
+  /* ---- Risk slide ---- */
+  .risk-list{ margin-top:clamp(1.6rem,3vh,2.2rem); display:flex; flex-direction:column; gap:clamp(1.2rem,2.4vh,1.8rem); }
+  .risk-item{
+    display:flex;
+    gap: clamp(1.2rem, 2vw, 1.8rem);
+  }
+  .risk-item .bar{ flex:0 0 4px; background:var(--coral); }
+  .risk-item h4{ font-size:clamp(1.1rem, 1.4vw, 1.3rem); font-weight:600; margin-bottom:0.35rem; }
+  .risk-item p{ color:var(--text-muted); font-size:clamp(1rem, 1.2vw, 1.15rem); max-width:60ch; line-height:1.6; }
+
+  /* ---- Score slide ---- */
+  .score-grid{ margin-top:clamp(1.8rem,3vh,2.4rem); display:flex; flex-direction:column; gap:clamp(0.9rem,1.8vh,1.3rem); }
+  .score-row{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.4rem; }
+  .score-label{ flex:0 0 220px; font-size:clamp(1rem, 1.2vw, 1.2rem); color:var(--text-muted); }
+  .score-track{ flex:1 1 220px; height:12px; background:var(--panel-2); position:relative; }
+  .score-fill{ height:100%; background:var(--lime); }
+  .score-val{ flex:0 0 auto; font-family:var(--mono); font-size:clamp(0.95rem, 1.1vw, 1.1rem); color:var(--text); }
+  .score-total{
+    margin-top:clamp(1.6rem,3vh,2.2rem); padding-top:clamp(1.4rem,2.6vh,1.8rem); border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:1rem;
+  }
+  .score-total .num{ font-family:var(--serif); font-weight:900; font-size:clamp(3rem, 5vw, 4.2rem); color:var(--lime); }
+  .score-total .label{ color:var(--text-muted); font-size:clamp(1rem, 1.2vw, 1.2rem); }
+
+  /* ---- Closing slide ---- */
+  .next-steps{ margin-top:clamp(1.8rem,3vh,2.4rem); display:flex; flex-direction:column; gap:clamp(1rem,2vh,1.4rem); max-width:64ch; }
+  .next-steps .row{ display:flex; gap:1.2rem; align-items:baseline; }
+  .next-steps .row .idx{ font-family:var(--mono); color:var(--lime-dim); font-size:clamp(0.9rem,1.1vw,1.05rem); width:1.6rem; flex-shrink:0; }
+  .next-steps .row p{ color:var(--text); font-size:clamp(1.1rem, 1.35vw, 1.3rem); line-height:1.6; }
+
+  /* ---- Nav UI ---- */
+  .nav-ui{
+    position:fixed;
+    bottom: clamp(2vh, 3.2vh, 4vh); left:clamp(1.5rem,7vw,6rem); right:clamp(1.5rem,7vw,6rem);
+    display:flex; align-items:center; justify-content:space-between;
+    z-index:20;
+  }
+  .dots{ display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--panel-2);
+    cursor:pointer;
+    transition: background .3s;
+  }
+  .dot.active{ background:var(--lime); }
+  .arrows{ display:flex; gap:0.8rem; align-items:center; }
+  .arrow-btn{
+    width:44px; height:44px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.15rem;
+    transition: border-color .2s, color .2s;
+  }
+  .arrow-btn:hover{ border-color:var(--lime); color:var(--lime); }
+  .arrow-btn:focus-visible{ outline:2px solid var(--lime); outline-offset:2px; }
+  .counter{
+    font-family:var(--mono);
+    font-size:clamp(0.85rem, 1vw, 1rem);
+    color:var(--text-muted);
+  }
+  .counter b{ color:var(--text); }
+
+  @media (prefers-reduced-motion: reduce){
+    .slide{ transition:none; }
+  }
+
+  @media (max-width: 820px){
+    .audience-col{ border-right:none; border-bottom:1px solid var(--line); padding:1.2rem 0; flex:1 1 100%; }
+    .compare-box{ flex:1 1 100%; }
+    .cover-bignum{ display:none; }
+    .score-label{ flex:1 1 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 1. COVER -->
+  <section class="slide slide-cover active">
+    <div class="cover-bignum">01</div>
+    <div class="kicker">Đề xuất sản phẩm — bộ kit marketing bằng AI</div>
+    <h1>Biến dữ liệu sản phẩm thành một chiến lược ra mắt hoàn chỉnh — bằng AI.</h1>
+    <p class="lede">Một bộ kit giúp người bán nhỏ nghĩ hộ phần khó nhất: chiến lược marketing cho sản phẩm mới, từ nghiên cứu thị trường đến nội dung sẵn sàng đăng bán.</p>
+    <div class="cover-meta">
+      <span>Đối tượng: <b>seller & thương hiệu nhỏ trên sàn TMĐT</b></span>
+      <span>Nền tảng: <b>Shopee · TikTok Shop</b></span>
+    </div>
+  </section>
+
+  <!-- 2. VẤN ĐỀ -->
+  <section class="slide">
+    <div class="cols">
+      <div>
+        <div class="kicker">Vấn đề</div>
+        <h1 class="title">Ra một sản phẩm mới, nhưng không biết bắt đầu marketing từ đâu.</h1>
+        <p class="body-text">Quá khó để nghĩ ra một chiến lược hoàn chỉnh khi mọi thứ — nghiên cứu, ý tưởng, hình ảnh, kênh bán — đều phải tự làm cùng lúc.</p>
+      </div>
+      <div>
+        <ul class="plain">
+          <li>Không có dữ liệu để biết xu hướng nào đang được thị trường đón nhận
+            <span class="muted">Quyết định marketing dựa trên cảm tính, không dựa trên số liệu</span>
+          </li>
+          <li>Chỉ nghĩ ra được một hướng truyền thông duy nhất
+            <span class="muted">Không đủ thời gian để thử nhiều concept khác nhau trước khi chọn</span>
+          </li>
+          <li>Ngân sách không đủ để thuê agency hay chuyên gia marketing
+            <span class="muted">Đặc biệt đúng với seller cá nhân và hộ kinh doanh nhỏ</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NGUYÊN NHÂN -->
+  <section class="slide">
+    <div class="kicker">Nguyên nhân</div>
+    <h1 class="title">Marketing bài bản đòi hỏi năm kỹ năng khác nhau — cùng một lúc.</h1>
+    <div class="skill-grid">
+      <div class="skill-cell"><div class="n">01</div><div class="t">Nghiên cứu thị trường</div></div>
+      <div class="skill-cell"><div class="n">02</div><div class="t">Phân tích xu hướng</div></div>
+      <div class="skill-cell"><div class="n">03</div><div class="t">Thiết kế concept</div></div>
+      <div class="skill-cell"><div class="n">04</div><div class="t">Sản xuất hình ảnh</div></div>
+      <div class="skill-cell"><div class="n">05</div><div class="t">Vận hành đa nền tảng</div></div>
+    </div>
+    <p class="body-text" style="margin-top:clamp(1.6rem,3vh,2.2rem);">Một cá nhân hay một đội nhỏ hiếm khi giỏi đều cả năm việc này — và thuê ngoài từng khâu thì chi phí cộng dồn nhanh chóng vượt quá khả năng của người bán nhỏ.</p>
+  </section>
+
+  <!-- 4. ĐỐI TƯỢNG & QUY MÔ -->
+  <section class="slide">
+    <div class="kicker">Đối tượng & tần suất</div>
+    <h1 class="title">Vấn đề lặp lại mỗi lần có sản phẩm mới hoặc mùa sale.</h1>
+    <div class="audience-row">
+      <div class="audience-col">
+        <h3>Ai gặp vấn đề này</h3>
+        <p>Seller cá nhân, hộ kinh doanh, và thương hiệu nhỏ đang bán hàng trên các sàn thương mại điện tử — nhóm hiếm khi có phòng marketing riêng.</p>
+      </div>
+      <div class="audience-col">
+        <h3>Khi nào vấn đề xuất hiện</h3>
+        <p>Mỗi lần ra mắt sản phẩm mới, và lặp lại theo mùa kinh doanh cao điểm — sale giữa năm, cuối năm, lễ Tết.</p>
+      </div>
+      <div class="audience-col">
+        <h3>Ở đâu</h3>
+        <p>Tập trung ở các sàn TMĐT phổ biến tại Việt Nam — nơi tốc độ ra sản phẩm nhanh nhưng công cụ hỗ trợ chiến lược còn thiếu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. GIẢI PHÁP — WORKFLOW -->
+  <section class="slide">
+    <div class="kicker">Giải pháp — Workflow</div>
+    <h1 class="title">Từ dữ liệu sản phẩm đến nội dung sẵn sàng đăng.</h1>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="fn">1</div>
+        <h4>Nhập dữ liệu sản phẩm</h4>
+        <p>Tên, ảnh, kích thước, giá, thể loại, chất liệu.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="fn">2</div>
+        <h4>Research thị trường & xu hướng</h4>
+        <p>Đối chiếu với ngành hàng, chất liệu, phân khúc giá.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="fn">3</div>
+        <h4>Đề xuất hướng marketing</h4>
+        <p>Nhiều route và concept, mỗi hướng một thông điệp riêng.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="fn">4</div>
+        <h4>Tạo hình ảnh quảng cáo</h4>
+        <p>Sinh hình ảnh theo concept đã chọn.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="fn">5</div>
+        <h4>Chuẩn bị triển khai đa sàn</h4>
+        <p>Đóng gói theo định dạng Shopee, TikTok Shop — chờ xác nhận trước khi đăng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b. SO SÁNH QUY TRÌNH -->
+  <section class="slide">
+    <div class="kicker">Trước & sau</div>
+    <h1 class="title">Từ 3-7 ngày xuống còn 1-2 giờ cho mỗi sản phẩm.</h1>
+
+    <div class="flow-compare">
+      <div class="row-current">
+        <div class="flow-row-head">
+          <h3>Hiện tại — làm thủ công</h3>
+          <span class="time">3–7 ngày / sản phẩm</span>
+        </div>
+        <div class="flow-compact">
+          <div class="fc-step"><div class="fc-n">1</div><h5>Có sản phẩm</h5></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step bottleneck">
+            <span class="fc-badge bottleneck">Nút thắt</span>
+            <div class="fc-n">2</div><h5>Research xu hướng thủ công</h5><div class="fc-time">120–240'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">3</div><h5>Nghĩ concept marketing</h5><div class="fc-time">60–120'</div></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">4</div><h5>Tạo ảnh quảng bá</h5><div class="fc-time">120–240'</div></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">5</div><h5>Viết content</h5><div class="fc-time">60–120'</div></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">6</div><h5>Đăng lên sàn TMĐT</h5><div class="fc-time">60–120'</div></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">7</div><h5>Hiệu quả thấp</h5><div class="fc-time">quay lại bước 3</div></div>
+        </div>
+      </div>
+
+      <div class="row-future">
+        <div class="flow-row-head">
+          <h3>Với bộ kit AI</h3>
+          <span class="time">1–2 giờ / sản phẩm</span>
+        </div>
+        <div class="flow-compact">
+          <div class="fc-step"><div class="fc-n">1</div><h5>Nhập thông tin sản phẩm</h5><div class="fc-time">10'</div></div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step">
+            <span class="fc-badge ai">AI step</span>
+            <div class="fc-n">2</div><h5>AI research thị trường & xu hướng</h5><div class="fc-time">5'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step">
+            <span class="fc-badge ai">AI step</span>
+            <div class="fc-n">3</div><h5>AI đề xuất 3–5 hướng marketing</h5><div class="fc-time">5'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step">
+            <span class="fc-badge human">Người dùng chọn</span>
+            <div class="fc-n">4</div><h5>Chọn hướng marketing</h5><div class="fc-time">15'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step">
+            <span class="fc-badge ai">AI step</span>
+            <div class="fc-n">5</div><h5>AI tạo ảnh + viết content</h5><div class="fc-time">10'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step">
+            <span class="fc-badge human">Người dùng chọn</span>
+            <div class="fc-n">6</div><h5>Review + chỉnh sửa</h5><div class="fc-time">20–30'</div>
+          </div>
+          <div class="fc-arrow">→</div>
+          <div class="fc-step"><div class="fc-n">7</div><h5>AI đăng lên TikTok Shop / Shopee</h5><div class="fc-time">10'</div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="flow-note">Fallback: concept AI đề xuất không phù hợp → yêu cầu đề xuất lại. Ảnh chưa đạt → dùng làm ảnh tham khảo (reference) để chỉnh tay. Mọi nội dung đều qua bước review của người dùng trước khi đăng công khai.</p>
+  </section>
+
+  <!-- 6. ĐIỂM KHÁC BIỆT -->
+  <section class="slide">
+    <div class="kicker">Điểm khác biệt</div>
+    <h1 class="title">Không phải thêm một công cụ. Một chuỗi khép kín.</h1>
+    <div class="compare">
+      <div class="compare-box dim">
+        <h4>Công cụ marketing AI hiện có</h4>
+        <div class="chain">Viết nội dung<br>hoặc<br>Tạo hình ảnh<br>hoặc<br>Phân tích số liệu<br><span style="color:var(--text-muted); font-style:italic; font-size:0.72em;">— từng khâu tách rời, người dùng tự nối lại</span></div>
+      </div>
+      <div class="compare-box highlight">
+        <h4>Bộ kit marketing sản phẩm</h4>
+        <div class="chain">Dữ liệu sản phẩm<br>→ Research thị trường<br>→ Concept marketing<br>→ Hình ảnh quảng cáo<br>→ Nội dung sẵn sàng đăng</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. RỦI RO -->
+  <section class="slide">
+    <div class="kicker">Ranh giới cần giữ</div>
+    <h1 class="title">Ba giới hạn thiết kế ngay từ đầu.</h1>
+    <div class="risk-list">
+      <div class="risk-item"><div class="bar"></div>
+        <div><h4>Số liệu thị trường cần gắn nguồn xác thực</h4>
+        <p>Quyết định chiến lược sai dựa trên số liệu sai gây thiệt hại tài chính thật — không để AI tự suy diễn số liệu.</p></div>
+      </div>
+      <div class="risk-item"><div class="bar"></div>
+        <div><h4>Hình ảnh AI tạo cần kiểm tra bản quyền</h4>
+        <p>Tránh trùng lặp với thương hiệu hoặc tác phẩm có sẵn của bên khác trước khi sử dụng.</p></div>
+      </div>
+      <div class="risk-item"><div class="bar"></div>
+        <div><h4>Người bán xác nhận bước đăng bán cuối cùng</h4>
+        <p>AI chuẩn bị nội dung sẵn sàng — việc bấm đăng công khai luôn do người dùng quyết định, để tránh sai sót không thể thu hồi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ĐÁNH GIÁ TIỀM NĂNG -->
+  <section class="slide">
+    <div class="kicker">Vì sao chọn đề tài này</div>
+    <h1 class="title">Đánh giá theo năm tiêu chí.</h1>
+    <div class="score-grid">
+      <div class="score-row"><div class="score-label">Mức độ đau</div><div class="score-track"><div class="score-fill" style="width:80%"></div></div><div class="score-val">4/5</div></div>
+      <div class="score-row"><div class="score-label">Tần suất & quy mô</div><div class="score-track"><div class="score-fill" style="width:80%"></div></div><div class="score-val">4/5</div></div>
+      <div class="score-row"><div class="score-label">Khả thi kỹ thuật</div><div class="score-track"><div class="score-fill" style="width:80%"></div></div><div class="score-val">4/5</div></div>
+      <div class="score-row"><div class="score-label">Tính khác biệt</div><div class="score-track"><div class="score-fill" style="width:60%"></div></div><div class="score-val">3/5</div></div>
+      <div class="score-row"><div class="score-label">Rủi ro thấp</div><div class="score-track"><div class="score-fill" style="width:60%"></div></div><div class="score-val">3/5</div></div>
+    </div>
+    <div class="score-total">
+      <div class="num">18</div>
+      <div class="label">/ 25 điểm — đứng thứ 3 trong 6 đề tài được xem xét</div>
+    </div>
+  </section>
+
+  <!-- 9. KẾT LUẬN -->
+  <section class="slide">
+    <div class="kicker">Bước tiếp theo</div>
+    <h1 class="title">Bắt đầu hẹp, chứng minh giá trị, rồi mở rộng.</h1>
+    <div class="next-steps">
+      <div class="row"><div class="idx">1.</div><p>Chọn một ngành hàng cụ thể và một sàn TMĐT duy nhất để làm bản MVP, thay vì phủ rộng ngay từ đầu.</p></div>
+      <div class="row"><div class="idx">2.</div><p>Kiểm chứng chất lượng nghiên cứu thị trường và concept trên một nhóm seller thật trước khi tự động hoá bước đăng bán.</p></div>
+      <div class="row"><div class="idx">3.</div><p>Xây cơ chế trích dẫn nguồn số liệu và kiểm tra bản quyền hình ảnh song song với tính năng chính, không để lại làm sau.</p></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-ui">
+  <div class="dots" id="dots"></div>
+  <div class="counter"><b id="cur">1</b> / <span id="total">9</span></div>
+  <div class="arrows">
+    <button class="arrow-btn" id="prev" aria-label="Slide trước">←</button>
+    <button class="arrow-btn" id="next" aria-label="Slide sau">→</button>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+  const curEl = document.getElementById('cur');
+  document.getElementById('total').textContent = slides.length;
+  let idx = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    curEl.textContent = idx + 1;
+  }
+
+  document.getElementById('next').addEventListener('click', () => go(idx + 1));
+  document.getElementById('prev').addEventListener('click', () => go(idx - 1));
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight' || e.key === ' ') go(idx + 1);
+    if(e.key === 'ArrowLeft') go(idx - 1);
+  });
+
+  let touchX = null;
+  window.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  window.addEventListener('touchend', e => {
+    if(touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(dx > 50) go(idx - 1);
+    if(dx < -50) go(idx + 1);
+    touchX = null;
+  });
+</script>
+
+</body>
+</html>
