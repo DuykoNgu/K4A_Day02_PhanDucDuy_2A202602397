@@ -12,7 +12,7 @@
   - Theo dõi và chăm sóc cây trồng tại nhà/vườn
   - Xử lý thủ tục hành chính cá nhân (giấy tờ, đăng ký, khai báo)
   - Cập nhật thông tin pháp luật mới liên quan đến đời sống
-  - Tạo nội dung sáng tạo (quảng cáo, media) và kiểm tra bản quyền tư liệu
+  - Lên chiến lược marketing và quảng bá sản phẩm trên các sàn TMĐT (TikTok Shop, Shopee)
 
 ---
 
@@ -26,7 +26,7 @@
 | 2 | AI có thể tốt hơn + Pain từ người khác | Người mới trồng cây không nhận biết sớm sâu bệnh, nấm, thiếu dinh dưỡng — phát hiện trễ, xử lý sai cách hoặc mất cả vụ mùa | Nông dân mới, người làm vườn tại nhà, hộ trồng quy mô nhỏ | Khảo sát nhỏ: 3/5 người làm vườn tại nhà từng mất ít nhất 1 đợt cây vì phát hiện bệnh trễ; thời gian tra cứu triệu chứng mỗi lần 30-60 phút, vẫn không chắc chẩn đoán đúng |
 | 3 | Tốn thời gian + Lặp lại | Phải đi qua nhiều cấp, nhiều phòng ban để hoàn tất một thủ tục hành chính — mất kiên nhẫn và tốn thời gian do không biết đúng quy trình/giấy tờ cần chuẩn bị | Người dân làm thủ tục (đăng ký kinh doanh, chuyển hộ khẩu, cấp giấy phép) | Trung bình 3-5 lần đi lại cho 1 thủ tục; mỗi lần chờ 1-3 giờ; 60% người được hỏi từng bị trả hồ sơ vì thiếu giấy tờ |
 | 4 | Tốn thời gian + AI có thể tốt hơn | Người dân không nắm bắt kịp thời luật, nghị định, thông tư mới — dẫn đến sai phạm không cố ý hoặc mất thời gian trong thủ tục | Người dân, chủ doanh nghiệp nhỏ, người làm kế toán/nhân sự | Văn bản pháp luật cập nhật liên tục ở nhiều cấp; 2/5 người được hỏi từng bị phạt hoặc mất quyền lợi vì không biết luật mới; đọc hiểu 1 văn bản pháp luật mất 30-60 phút |
-| 5 | AI có thể tốt hơn + Pain từ người khác | Người sáng tạo nội dung vô tình sử dụng hình ảnh/ý tưởng dính bản quyền, hoặc tự sáng tạo ra nội dung mà không biết nó đã trùng với ý tưởng/tác phẩm có sẵn — phải làm lại nội dung, tốn thời gian và rủi ro pháp lý | Người làm quảng cáo, content creator, team truyền thông | 1-2 lần/quý phải gỡ/làm lại nội dung vì vi phạm bản quyền; mỗi lần mất 2-4 giờ sửa + rủi ro bị phạt; kiểm tra bản quyền thủ công mất 15-30 phút/ảnh mà vẫn không chắc; có trường hợp tự thiết kế xong mới phát hiện concept đã có người làm trước |
+| 5 | Tốn thời gian + AI có thể tốt hơn | Người bán hàng/chủ shop nhỏ rất khó nghĩ ra một chiến lược marketing tổng thể để đưa sản phẩm ra thị trường — từ research xu hướng, chọn concept quảng bá, tạo ảnh/content, đến triển khai trên các sàn TMĐT (TikTok Shop, Shopee) | Chủ shop online, seller trên sàn TMĐT, người mới kinh doanh, freelancer marketing | Mất 3-7 ngày để lên 1 chiến lược marketing cho 1 sản phẩm mới; 70% seller nhỏ chỉ đăng sản phẩm không có chiến lược → tỷ lệ chuyển đổi thấp; chi phí thuê agency marketing từ 5-20 triệu/tháng — quá cao cho shop nhỏ |
 
 > Gợi ý tự soi: tuần trước mất nhiều thời gian nhất vào việc gì? Việc gì hay trì hoãn? Người khác hay hỏi lại câu gì? Workflow nào ai cũng biết là chậm?
 
@@ -52,7 +52,7 @@ Giữ bài nào: actor cụ thể, workflow vẽ được 3-7 bước, bottlenec
 |---|---|---|---|
 | 1 | Nhận diện sâu bệnh cho người mới trồng trọt (nông nghiệp xanh) | (1) Khoảng trống thị trường rõ ở phân khúc nông dân nhỏ lẻ/người làm vườn tại nhà; (2) Kỹ thuật image recognition đã chín muồi; (3) Workflow rõ ràng: chụp ảnh → chẩn đoán → xử lý | Độ chính xác chẩn đoán phụ thuộc chất lượng ảnh và dữ liệu huấn luyện theo từng loại cây/vùng khí hậu |
 | 2 | Thủ tục hành chính nhiều tầng nấc | (1) Mức độ đau và quy mô lớn nhất — ai cũng từng trải qua; (2) Workflow có bottleneck rõ: bước tìm hiểu quy trình/giấy tờ; (3) Tác động xã hội cao | Khả thi kỹ thuật phụ thuộc vào việc số hoá dữ liệu cơ quan nhà nước — thứ AI không tự quyết định được |
-| 3 | Vi phạm bản quyền không chủ ý trong sáng tạo nội dung | (1) Thị trường ngách rõ ràng (người làm quảng cáo/nội dung); (2) Công nghệ nhận diện hình ảnh/nội dung trùng lặp đã có nền tảng tốt; (3) Phòng ngừa có giá trị cao hơn nhiều so với xử lý hậu quả | Độ chính xác nhận diện bản quyền phụ thuộc chất lượng cơ sở dữ liệu tham chiếu |
+| 3 | Khó nghĩ ra chiến lược marketing để đưa sản phẩm ra thị trường — AI Marketing Kit | (1) Pain rất rõ: seller nhỏ không có ngân sách thuê agency, phải tự làm mọi thứ; (2) AI đã đủ khả năng research thị trường, gợi ý concept, tạo ảnh, và viết content; (3) Workflow end-to-end rõ ràng: nhập thông tin SP → research → lên chiến lược → tạo ảnh/content → triển khai | Chất lượng output AI (ảnh, content) có đủ tốt để dùng thật trên sàn không; AI research xu hướng có đúng và cập nhật không |
 
 ### 2.2. Problem Cards chi tiết (lặp lại cho cả 3 cards)
 
@@ -194,67 +194,71 @@ File đính kèm: `01-individual-problem-scan-workflow-card-2.png`
 
 ---
 
-#### Problem Card #3 — Vi phạm bản quyền không chủ ý trong sáng tạo nội dung
+#### Problem Card #3 — AI Marketing Kit: từ sản phẩm đến chiến lược quảng bá
 
 ```text
 Problem 1 câu:
-Người sáng tạo nội dung (làm quảng cáo, truyền thông) vô tình sử dụng tư liệu dính bản quyền, hoặc tự sáng tạo ra nội dung mà không biết nó đã trùng/gần giống với ý tưởng hay tác phẩm đã tồn tại — dẫn đến phải gỡ/làm lại nội dung, tốn thời gian và rủi ro pháp lý.
+Người bán hàng/chủ shop nhỏ rất khó nghĩ ra một chiến lược marketing tổng thể để đưa sản phẩm ra thị trường — từ research xu hướng, lên concept quảng bá, tạo ảnh/content, đến triển khai trên sàn TMĐT — dẫn đến đăng sản phẩm "trơ" không có chiến lược, tỷ lệ chuyển đổi thấp, lãng phí ngân sách quảng cáo.
 
 Actor:
-Content creator, designer quảng cáo, team truyền thông — đặc biệt freelancer và team nhỏ không có bộ phận pháp lý riêng.
+Chủ shop online, seller trên sàn TMĐT (TikTok Shop, Shopee), người mới kinh doanh, freelancer marketing — những người không có ngân sách thuê agency và phải tự làm mọi khâu marketing.
 
 Thời điểm / bối cảnh:
-Xảy ra ở bất kỳ giai đoạn nào của quá trình sản xuất nội dung; phổ biến trong ngành sáng tạo nội dung, quảng cáo, truyền thông.
+Mỗi khi ra sản phẩm mới hoặc muốn đẩy mạnh sản phẩm hiện có; lặp lại mỗi tuần/tháng tuỳ quy mô shop; đặc biệt phổ biến ở seller nhỏ lẻ trên các sàn TMĐT Việt Nam.
 
 Current workflow 3-7 bước:
-1. Lên ý tưởng nội dung / design
-2. Tìm tư liệu (ảnh stock, font, music, video clip) trên nhiều nguồn
-3. Ghép/chỉnh sửa tư liệu vào sản phẩm, hoặc tự thiết kế/sáng tạo từ đầu
-4. Review nội bộ (nếu có) — thường không kiểm tra bản quyền kỹ, và không kiểm tra xem ý tưởng mình tự nghĩ ra đã có ai làm chưa
-5. Đăng/xuất bản nội dung
-6. (Nếu bị report hoặc phát hiện trùng) Gỡ nội dung + tìm nguyên nhân + làm lại
+1. Có sản phẩm muốn bán (biết tên, giá, chất liệu, thể loại, kích thước)
+2. Tự research xu hướng thị trường bằng tay (lướt TikTok, xem đối thủ, Google Trends) — 2-4 giờ
+3. Tự nghĩ concept/hướng marketing (thường dựa vào cảm tính, không có data) — 1-2 giờ
+4. Tự tạo ảnh quảng bá / thuê photographer / dùng Canva — 2-4 giờ
+5. Viết mô tả sản phẩm + content quảng cáo cho từng kênh — 1-2 giờ
+6. Đăng lên sàn TMĐT (TikTok Shop, Shopee) và chạy quảng cáo — 1-2 giờ
+7. Theo dõi hiệu quả, nếu không tốt → quay lại bước 3 thử hướng khác
 
 Bottleneck:
-Bước 2-4 — tìm/sử dụng tư liệu và kiểm tra tính độc đáo: không có công cụ kiểm tra nhanh nguồn gốc, tình trạng bản quyền, cũng như không biết ý tưởng mình tự sáng tạo đã trùng với tác phẩm có sẵn hay chưa; kiểm tra thủ công mất 15-30 phút/ảnh mà vẫn không chắc.
+Bước 2-4 — research thị trường, nghĩ concept marketing, và tạo ảnh quảng bá: mất 5-10 giờ cho 1 sản phẩm, kết quả phụ thuộc cảm tính vì không có data thị trường thực tế; concept marketing thường không có "hơi thở mới" vì seller nhỏ không có kinh nghiệm branding; ảnh quảng bá tự làm thường không đủ chuyên nghiệp.
 
 Impact:
-1-2 lần/quý phải gỡ/làm lại nội dung; mỗi lần mất 2-4 giờ; rủi ro bị phạt tiền hoặc kiện tụng; ảnh hưởng uy tín thương hiệu. Trường hợp tự sáng tạo mà trùng ý tưởng còn gây thất vọng hơn vì đã đầu tư công sức sáng tạo từ đầu.
+Mất 3-7 ngày để lên 1 chiến lược marketing hoàn chỉnh cho 1 sản phẩm; 70% seller nhỏ đăng sản phẩm không có chiến lược rõ → tỷ lệ chuyển đổi thấp (dưới 1%); chi phí thuê agency marketing từ 5-20 triệu/tháng — quá cao cho shop nhỏ; lãng phí ngân sách quảng cáo vì chạy ads không đúng concept/đúng thị trường.
 
 Success metric:
-Giảm số lần vi phạm bản quyền không chủ ý xuống 0 lần/quý; giảm thời gian kiểm tra bản quyền từ 15-30 phút/ảnh xuống <1 phút/ảnh; 100% nội dung được scan bản quyền trước khi xuất bản.
+Giảm thời gian lên chiến lược marketing từ 3-7 ngày xuống dưới 2 giờ; tăng tỷ lệ chuyển đổi từ dưới 1% lên 2-3% nhờ chiến lược có data-driven; giảm chi phí marketing ít nhất 50% so với thuê agency.
 
 Non-AI alternative:
-Chỉ dùng ảnh stock có license rõ ràng (Shutterstock, Unsplash) — nhưng hạn chế sáng tạo. Thuê luật sư kiểm tra — quá đắt cho freelancer/team nhỏ. Google Reverse Image Search — chậm và không đầy đủ.
+Dùng template marketing có sẵn (Canva, Shopee template) — nhưng chung chung, không phù hợp với từng sản phẩm cụ thể. Học khoá marketing online — mất thời gian và vẫn phải tự áp dụng. Copy chiến lược đối thủ — thiếu sáng tạo, không có "hơi thở mới".
 
 AI hypothesis:
-Phòng ngừa: AI scan nội dung trước khi đăng/xuất bản, cảnh báo nếu trùng khớp hoặc gần giống tư liệu có bản quyền đã biết — bao gồm cả trường hợp nội dung tự sáng tạo mà vô tình trùng concept/ý tưởng đã tồn tại. Ưu tiên use case phòng ngừa vì tiết kiệm thời gian và tránh rủi ro pháp lý ngay từ đầu.
+Tạo một AI Marketing Kit: người dùng nhập thông tin sản phẩm (tên brand, ảnh sản phẩm, kích thước, giá tiền, thể loại, chất liệu) → AI tự động (1) research thị trường và đưa ra số liệu xu hướng, (2) đề xuất nhiều hướng/route marketing với concept "hơi thở mới", (3) tạo ảnh quảng bá từ dữ liệu sản phẩm, (4) hỗ trợ triển khai nội dung trên TikTok Shop/Shopee. Concept: "từ 1 input sản phẩm → ra bộ kit marketing hoàn chỉnh".
 
 Quick gut:
 [ ] No AI / process fix
 [ ] Rule
-[x] Workflow
-[ ] Agent
+[ ] Workflow
+[x] Agent
 [ ] Chưa biết
 ```
 
 **Draft workflow Card #3:**
 
 ```text
-CURRENT STATE — 3-5 giờ (nếu tính cả xử lý hậu quả)
+CURRENT STATE — 3-7 ngày (cho 1 sản phẩm mới)
 
-[1 Lên ý tưởng: 30'] → [2 Tìm tư liệu: 30-60']
-→ [3 Ghép/chỉnh sửa: 60-120'] → [4 Review nội bộ: 15-30']  <-- không kiểm tra bản quyền kỹ
-→ [5 Đăng/xuất bản: 5'] → [6 Bị report → gỡ + làm lại: 120-240']  <-- hậu quả
+[1 Có sản phẩm: sẵn] → [2 Research xu hướng thủ công: 120-240']  <-- bottleneck
+→ [3 Nghĩ concept marketing (cảm tính): 60-120'] → [4 Tạo ảnh quảng bá: 120-240']
+→ [5 Viết content/mô tả: 60-120'] → [6 Đăng lên sàn + chạy ads: 60-120']
+→ [7 Hiệu quả thấp → quay lại bước 3]
 
-FUTURE STATE — 1.5-2.5 giờ (phòng ngừa, không có bước 6)
+FUTURE STATE — 1-2 giờ (AI Marketing Kit)
 
-[1 Lên ý tưởng: 30'] → [2 Tìm tư liệu / tự thiết kế: 30-60']
-→ [3 Ghép/chỉnh sửa: 60-120']
-→ [4 AI scan bản quyền + kiểm tra trùng ý tưởng: 2-5']  <-- AI step (so sánh cả tư liệu bên ngoài lẫn nội dung tự tạo với database tác phẩm đã có)
-→ [5 Người dùng xem kết quả + thay tư liệu vi phạm hoặc điều chỉnh concept trùng (nếu có): 10-15']  <-- human boundary
-→ [6 Đăng/xuất bản: 5']
+[1 Nhập thông tin SP vào kit (tên brand, ảnh, giá, kích thước, chất liệu, thể loại): 10']
+→ [2 AI research thị trường + đưa số liệu xu hướng: 5']  <-- AI step
+→ [3 AI đề xuất 3-5 hướng marketing / concept "hơi thở mới": 5']  <-- AI step
+→ [4 Người dùng chọn hướng phù hợp nhất: 15']  <-- human boundary
+→ [5 AI tạo ảnh quảng bá + viết content theo concept đã chọn: 10']  <-- AI step
+→ [6 Người dùng review + chỉnh sửa ảnh/content: 20-30']  <-- human boundary
+→ [7 AI hỗ trợ format + đăng lên TikTok Shop/Shopee: 10']
 
-Fallback: nếu AI không phát hiện được vi phạm hoặc trùng lặp (false negative) → vẫn có rủi ro bị report, nhưng tần suất thấp hơn nhiều so với không kiểm tra. App cần ghi rõ mức tin cậy và khuyến nghị kiểm tra thêm với nguồn chính thức nếu tư liệu quan trọng.
+Fallback: nếu AI research sai xu hướng hoặc concept không phù hợp → người dùng có thể yêu cầu AI đề xuất lại với điều kiện khác, hoặc tự chỉnh concept theo kinh nghiệm. Ảnh AI tạo không đạt → dùng làm reference rồi tự chỉnh hoặc thuê photographer. Mọi nội dung đều qua người dùng review trước khi đăng.
 ```
 
 File đính kèm: `01-individual-problem-scan-workflow-card-3.png`
